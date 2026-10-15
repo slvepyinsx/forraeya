@@ -1,26 +1,172 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-warm-bg: #F7F4EF;
+  --color-warm-card: #FFFFFF;
+  --color-warm-text: #2B2F2E;
+  --color-warm-muted: #6E7370;
+  --color-warm-border: #E5E0D8;
+  --color-warm-sage: #6B7A6E;
+  --color-warm-sageHover: #57655A;
+  --color-warm-sage-hover: #57655A;
+  --color-warm-softSage: #E3E8E4;
+  --color-warm-soft-sage: #E3E8E4;
+  --color-warm-ivory: #FFFFFF;
+  --color-warm-champagne: #F0EAE1;
+  --color-warm-gold: #D1B894;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-serif: var(--font-cormorant), Cormorant Garamond, serif;
+  --font-sans: var(--font-jakarta), Plus Jakarta Sans, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-jakarta), Plus Jakarta Sans, sans-serif;
+  background-color: #F7F4EF;
+  color: #2B2F2E;
+  overflow-x: hidden;
+  touch-action: manipulation;
+}
+
+.font-serif-title {
+  font-family: var(--font-cormorant), Cormorant Garamond, serif;
+}
+
+/* Minimal Soft Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(229, 224, 216, 0.9);
+  box-shadow: 0 10px 30px -10px rgba(43, 47, 46, 0.04);
+}
+
+/* Washi Tape Accent for Polaroids */
+.washi-tape {
+  background: rgba(227, 232, 228, 0.75);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Smooth Step Transitions */
+.step-panel {
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step-hidden {
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.step-active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+  visibility: visible;
+}
+
+/* 3D Flip Card Effect */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Subtle Candle Flame Animation */
+.candle-flame {
+  width: 14px;
+  height: 24px;
+  background: linear-gradient(to top, #FFD175, #FFF7D6);
+  border-radius: 50% 50% 20% 20%;
+  box-shadow: 0 0 18px rgba(255, 209, 117, 0.75);
+  animation: flameFlicker 1.6s infinite alternate ease-in-out;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+@keyframes flameFlicker {
+  0% {
+    transform: scale(1) rotate(-1.5deg);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.08) rotate(1.5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95) rotate(-0.5deg);
+    opacity: 0.9;
+  }
+}
+
+.flame-extinguished {
+  opacity: 0 !important;
+  transform: scale(0.1) translateY(-12px) !important;
+}
+
+/* Polaroid Hover Effect */
+.polaroid-frame {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.polaroid-frame:hover {
+  transform: translateY(-4px) rotate(0deg) !important;
+  box-shadow: 0 12px 25px -8px rgba(43, 47, 46, 0.08);
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #E5E0D8;
+  border-radius: 2px;
+}
+
+/* Typewriter Cursor */
+.typewriter-cursor::after {
+  content: '|';
+  animation: blink 1s infinite;
+  color: #6B7A6E;
+  font-weight: 300;
+}
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Hide Next.js Dev Indicator */
+nextjs-portal,
+[data-nextjs-dev-tools-indicator],
+#next-dev-tools-root,
+next-route-announcer {
+  display: none !important;
 }
